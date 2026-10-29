@@ -28,9 +28,19 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
     && npm run build \
     && rm -rf node_modules
 
-RUN sed -ri 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' /etc/apache2/sites-available/000-default.conf \
-    && sed -ri 's/^Listen 80$/Listen 10000/' /etc/apache2/ports.conf \
-    && printf '\n<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n' >> /etc/apache2/apache2.conf \
+RUN printf '%s\n' \
+    '<VirtualHost *:10000>' \
+    '    DocumentRoot /var/www/html/public' \
+    '    <Directory /var/www/html/public>' \
+    '        Options FollowSymLinks' \
+    '        AllowOverride All' \
+    '        Require all granted' \
+    '    </Directory>' \
+    '    ErrorLog /var/log/apache2/error.log' \
+    '    CustomLog /var/log/apache2/access.log combined' \
+    '</VirtualHost>' \
+    > /etc/apache2/sites-available/000-default.conf \
+    && printf 'Listen 10000\n' > /etc/apache2/ports.conf \
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
