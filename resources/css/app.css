@@ -1,0 +1,114 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://use.typekit.net/qxn7zuu.css");
+
+@import "tailwindcss";
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+    --font-sans:
+        "Atkinson Hyperlegible Next", sans-serif, "Instrument Sans",
+        ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-heading: "gopher", sans-serif;
+    --color-cream: #eee9df;
+    --color-ink: #1b2632;
+    --color-navy: #2c3b4d;
+    --color-stone: #c9c1b1;
+    --color-rust: #a35139;
+    --color-amber: #ffb162;
+}
+@utility noise-bg-b-rust {
+    background-image:
+        url("/public/noise.svg"),
+        linear-gradient(to bottom, #b3624a 14%, #b5573c 53%, #a35139 88%);
+    background-blend-mode: multiply, normal;
+    background-size:
+        200px 200px,
+        cover;
+    background-repeat: repeat, no-repeat;
+}
+@utility noise-bg-b {
+    background-image:
+        url("/public/noise.svg"),
+        linear-gradient(
+            to bottom,
+            var(--color-cream) 0%,
+            var(--color-stone) 80%,
+            #debe9c 100%
+        );
+    background-blend-mode: overlay, normal;
+    background-size:
+        300px 300px,
+        cover;
+    background-repeat: repeat, no-repeat;
+}
+@utility noise-bg-t {
+    background-image:
+        url("/public/noise.svg"),
+        linear-gradient(
+            to top,
+            var(--color-cream) 0%,
+            var(--color-stone) 80%,
+            #debe9c 100%
+        );
+    background-blend-mode: overlay, normal;
+    background-size:
+        300px 300px,
+        cover;
+    background-repeat: repeat, no-repeat;
+}
+@utility goal-bg {
+    background-image: url("/public/home/goal.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+@utility goal-bg-mobile {
+    background-image: url("/public/home/goal.svg");
+    background-size: center;
+    background-repeat: no-repeat;
+}
+@utility login-bg {
+    background-image:
+        url("/public/login/login.svg"),
+        linear-gradient(to top, var(--color-ink) 0%, transparent 100%);
+    background-blend-mode: overlay, normal;
+    background-size: cover;
+    background-repeat: repeat, no-repeat;
+}
+@utility login-bg-mobile {
+    background-image:
+        url("/public/login/login.svg"),
+        linear-gradient(to top, var(--color-ink) 0%, transparent 100%);
+    background-blend-mode: overlay, normal;
+    background-size: center;
+    background-repeat: repeat, no-repeat;
+}
+
+.login-shape {
+    clip-path: polygon(
+        14% 0%,
+        100% 0%,
+        100% 20%,
+        100% 83%,
+        90% 100%,
+        20% 100%,
+        0% 100%,
+        0% 17%
+    );
+}
+
+.section-heading-1 {
+    @apply uppercase text-3xl text-center md:text-6xl;
+}
+.section-heading-2 {
+    @apply font-heading text-xl md:text-3xl font-light uppercase tracking-[4%];
+}
+.button {
+    @apply flex items-center gap-5 rounded-full text-sm text-center font-medium p-3 px-6 md:text-base md:py-3 md:px-12;
+}
+.form-input {
+    @apply w-full rounded-full bg-stone focus:bg-cream py-4 ps-5 pe-14 text-ink md:py-5 md:ps-7;
+}
